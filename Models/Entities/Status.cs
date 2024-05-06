@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Models.Entities;
 public class Status
 {
-    public int StatusId { get; set; }
+    public int StatusId { get; set; } //PK
     public string Titel { get; set; }
     public string Beschrijving { get; set; }
 }
