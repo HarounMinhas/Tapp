@@ -19,4 +19,8 @@ public class Label
     [Required(ErrorMessage = "Dit moet ingevuld zijn.")]
     [MinLength(1, ErrorMessage = "Dit moet ingevuld zijn.")]
     public string Beschrijving { get; set; }
+
+    // Navigatie-eigenschappen voor de relaties
+    public ICollection<Taak>? Taken { get; set; }// = new List<Taak>();
+    public ICollection<ToDo>? ToDos { get; set; }// = new List<ToDo>();
 }

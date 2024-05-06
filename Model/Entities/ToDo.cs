@@ -22,5 +22,6 @@ public class ToDo
     public string Titel { get; set; }
     [Required]
     public string Beschrijving { get; set; }
-    public ICollection<Label>? Labels { get; set; }
+    public int? LabelId { get; set; }
+    public Label? Label { get; set; }
 }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.Entities;
 public class Taak
@@ -24,5 +19,6 @@ public class Taak
     public int ProjectId { get; set; }
     public Project Project { get; set; }
     public ICollection<ToDo>? ToDos { get; set; }
-    public ICollection<Label>? Labels { get; set; }
+    public int? LabelId { get; set; }
+    public Label? Label { get; set; }
 }
