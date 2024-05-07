@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.Entities;
+
 public class Project
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,9 +14,12 @@ public class Project
     public Status? Status { get; set; }
     public int? DatumUurId { get; set; }
     public DatumUur? DatumUur { get; set; }
+
     [Required]
     public string Naam { get; set; }
+
     [Required]
     public string Beschrijving { get; set; }
+
     public ICollection<Taak>? Taken { get; set; }
 }

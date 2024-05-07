@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 
 namespace Models.Entities;
+
 public class EFTappContext : DbContext
 {
     public static IConfigurationRoot Configuration;
@@ -28,7 +29,6 @@ public class EFTappContext : DbContext
         {
             optionsBuilder.UseSqlServer(connectionString, options => options.MaxBatchSize(150));
         }
-
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,6 +39,28 @@ public class EFTappContext : DbContext
        .WithMany(p => p.Taken)
        .HasForeignKey(t => t.ProjectId)
        .OnDelete(DeleteBehavior.SetNull);
+
+        // Verwijder alle todo's als een taak wordt verwijderd
+        modelBuilder.Entity<Taak>()
+            .HasMany(t => t.ToDos)
+            .WithOne(td => td.Taak)
+            .HasForeignKey(td => td.TaakId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configuratie voor Taken en hun Labels
+        modelBuilder.Entity<Taak>()
+            .HasOne(t => t.Label)  // Navigatie eigenschap in Taak klasse
+            .WithMany(l => l.Taken)  // Navigatie collectie in Label klasse
+            .HasForeignKey(t => t.LabelId)  // Foreign key eigenschap in Taak klasse
+            .OnDelete(DeleteBehavior.Restrict);  // Stel de LabelId in op null als het Label wordt verwijderd
+
+        // Zorg ervoor dat andere relaties verstandig zijn ingesteld om cycli te vermijden
+        // Bijvoorbeeld, voor Taken en Status:
+        modelBuilder.Entity<Taak>()
+            .HasOne(t => t.Status)
+            .WithMany(s => s.Taken)
+            .HasForeignKey(t => t.StatusId)
+            .OnDelete(DeleteBehavior.ClientSetNull);  // Voorkom dat cascade delete de logica breekt
 
         modelBuilder.Entity<ToDo>()
             .HasOne<Taak>(td => td.Taak)
@@ -58,26 +80,12 @@ public class EFTappContext : DbContext
             .HasForeignKey(t => t.ProjectId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Verwijder alle todo's als een taak wordt verwijderd
-        modelBuilder.Entity<Taak>()
-            .HasMany(t => t.ToDos)
-            .WithOne(td => td.Taak)
-            .HasForeignKey(td => td.TaakId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         // Als een todo wordt verwijderd, blijft de taak bestaan
         modelBuilder.Entity<ToDo>()
             .HasOne(td => td.Taak)
             .WithMany(t => t.ToDos)
             .HasForeignKey(td => td.TaakId)
             .OnDelete(DeleteBehavior.ClientSetNull);
-
-        // Configuratie voor Taken en hun Labels
-        modelBuilder.Entity<Taak>()
-            .HasOne(t => t.Label)  // Navigatie eigenschap in Taak klasse
-            .WithMany(l => l.Taken)  // Navigatie collectie in Label klasse
-            .HasForeignKey(t => t.LabelId)  // Foreign key eigenschap in Taak klasse
-            .OnDelete(DeleteBehavior.Restrict);  // Stel de LabelId in op null als het Label wordt verwijderd
 
         // Configuratie voor ToDo's en hun Labels
         modelBuilder.Entity<ToDo>()
@@ -86,20 +94,9 @@ public class EFTappContext : DbContext
             .HasForeignKey(td => td.LabelId)  // Foreign key eigenschap in ToDo klasse
             .OnDelete(DeleteBehavior.NoAction);  // Stel de LabelId in op null als het Label wordt verwijderd
 
-        // Zorg ervoor dat andere relaties verstandig zijn ingesteld om cycli te vermijden
-        // Bijvoorbeeld, voor Taken en Status:
-        modelBuilder.Entity<Taak>()
-            .HasOne(t => t.Status)
-            .WithMany()
-            .HasForeignKey(t => t.StatusId)
-            .OnDelete(DeleteBehavior.NoAction);  // Voorkom dat cascade delete de logica breekt
-
-     
-
         // Bij het verwijderen van een adres, contactpersoon, datumuur, label, organisatietype, of status
         // behoud de verwijzende rij maar zet de foreign key op null
         //niet geimplementeerd
-
 
         // Seeding van OrganisatieTypes
         modelBuilder.Entity<OrganisatieType>().HasData(
@@ -199,8 +196,5 @@ public class EFTappContext : DbContext
             new { StatusId = 2, Titel = "Niet actief", Beschrijving = "Project is niet langer actief" },
             new { StatusId = 3, Titel = "In revisie", Beschrijving = "Project is in revisie voor verbeteringen" }
         );
-
     }
-
-
 }
