@@ -1,6 +1,6 @@
 ﻿using Models.Entities;
 
-namespace Model.Interfaces;
+namespace Model.Interfaces.Repositories;
 
 public interface IProjectRepository
 {
