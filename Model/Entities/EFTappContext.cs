@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Models.Entities;
+namespace Model.Entities;
 
 public class EFTappContext : DbContext
 {
@@ -16,6 +16,9 @@ public class EFTappContext : DbContext
     public DbSet<Status> Statussen { get; set; }
     public DbSet<Taak> Taken { get; set; }
     public DbSet<ToDo> ToDos { get; set; }
+
+    public EFTappContext(DbContextOptions<EFTappContext> options): base(options) { }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
