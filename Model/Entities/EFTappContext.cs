@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using Tapp.Configuration;
 
 namespace Model.Entities;
 
 public class EFTappContext : DbContext
 {
-    public static IConfigurationRoot Configuration;
+    public static IConfiguration Configuration;
     public DbSet<Contactpersoon> Contactpersonen { get; set; }
     public DbSet<Adres> Adressen { get; set; }
     public DbSet<DatumUur> DatumUren { get; set; }
@@ -17,14 +20,15 @@ public class EFTappContext : DbContext
     public DbSet<Taak> Taken { get; set; }
     public DbSet<ToDo> ToDos { get; set; }
 
-    public EFTappContext(DbContextOptions<EFTappContext> options): base(options) { }
+    public EFTappContext(DbContextOptions<EFTappContext> options) : base(options) { }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        Configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetParent(AppContext.BaseDirectory)?.FullName)
-            .AddJsonFile("appsettings.json", false).Build();
+        var namespaceName = Assembly.GetExecutingAssembly().GetName().Name;
+        //hier kan ook statisch geopteerd worden voor "Model", maar maakt het wat onafhankelijker van elkaar
+        Configuration = ConfigurationHelper.BuildConfigurationAppSettings(namespaceName);
+
 
         var connectionString = Configuration.GetConnectionString("EFTapp");
 
@@ -32,6 +36,18 @@ public class EFTappContext : DbContext
         {
             optionsBuilder.UseSqlServer(connectionString, options => options.MaxBatchSize(150));
         }
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory()) // or another consistent directory
+            .AddJsonFile("appsettings.json", optional: false)
+            .Build();
+
+        var connectionString = configuration.GetConnectionString("EFTapp");
+        services.AddDbContext<EFTappContext>(options =>
+            options.UseSqlServer(connectionString, sqlOptions => sqlOptions.MaxBatchSize(150)));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -73,8 +89,8 @@ public class EFTappContext : DbContext
 
         modelBuilder.Entity<Contactpersoon>()
             .HasOne<Organisatie>(cp => cp.Organisatie)
-            .WithMany(o => o.Contactpersonen)
-            .HasForeignKey(cp => cp.OrganisatieId)
+            .WithOne(o => o.Contactpersoon)
+            .HasForeignKey<Contactpersoon>(cp => cp.OrganisatieId)
             .OnDelete(DeleteBehavior.Restrict);
         // Verwijder alle taken als een project wordt verwijderd
         modelBuilder.Entity<Project>()

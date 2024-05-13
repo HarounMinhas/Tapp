@@ -22,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json.bak">
+    <ProjectReference Include="..\Tapp.Configuration\Tapp.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,55 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Models.Entities.Adres">
+  <Class Name="Model.Entities.Adres">
     <Position X="1.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAIAAAAAAgAAACAAAAAAAAgAAgAAAGAA=</HashCode>
       <FileName>Entities\Adres.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Models.Entities.Contactpersoon">
+  <Class Name="Model.Entities.Contactpersoon">
     <Position X="1.5" Y="1" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAwAAgACgAAAAAAAAAQEAAAAAAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>Entities\Contactpersoon.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Models.Entities.DatumUur">
+  <Class Name="Model.Entities.DatumUur">
     <Position X="7.25" Y="5.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ABAAAAAgAAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\DatumUur.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Models.Entities.Label">
+  <Class Name="Model.Entities.Label">
     <Position X="12" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAEQAAQ=</HashCode>
       <FileName>Entities\Label.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Models.Entities.Organisatie">
+  <Class Name="Model.Entities.Organisatie">
     <Position X="4.25" Y="1.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAABAAAAAAAAABEAAAAgAAgAAAEAAiAAAAAA=</HashCode>
+      <HashCode>AAAAAAACAABAAAAAAAAABEAAAAgAAgAAAEAAgIAAAAA=</HashCode>
       <FileName>Entities\Organisatie.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="OrganisatieType" />
       <Property Name="Adres" />
     </ShowAsAssociation>
-    <ShowAsCollectionAssociation>
-      <Property Name="Contactpersonen" />
-    </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Models.Entities.OrganisatieType">
+  <Class Name="Model.Entities.OrganisatieType">
     <Position X="4.25" Y="4.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
       <FileName>Entities\OrganisatieType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Models.Entities.Project">
+  <Class Name="Model.Entities.Project">
     <Position X="6.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAMAAAAAAAAAAAAREAABAAAAAAAAAEAAAEAAAQ=</HashCode>
@@ -60,39 +57,39 @@
       <Property Name="Status" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Models.Entities.Status">
+  <Class Name="Model.Entities.Status">
     <Position X="9.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAEAAAAAAIAAAAAEQAAQ=</HashCode>
       <FileName>Entities\Status.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Models.Entities.Taak">
+  <Class Name="Model.Entities.Taak">
     <Position X="8.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAMEAAAAAEAAAAACAAABAgAAAAAIAEAAAEQAAA=</HashCode>
       <FileName>Entities\Taak.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Label" />
       <Property Name="Status" />
       <Property Name="Project" />
+      <Property Name="Label" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="ToDos" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Models.Entities.ToDo">
+  <Class Name="Model.Entities.ToDo">
     <Position X="11.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAMEAAAAAEAAAAAAAAAAAgAAAAAAEEAAAEwAAA=</HashCode>
       <FileName>Entities\ToDo.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Label" />
+      <Property Name="DatumUur" />
       <Property Name="Status" />
       <Property Name="Taak" />
-      <Property Name="DatumUur" />
+      <Property Name="Label" />
     </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />

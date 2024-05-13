@@ -1,10 +1,11 @@
 
+using Microsoft.Extensions.Configuration;
 using Model.Entities;
 using Model.Interfaces.Repositories;
 using Model.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -12,12 +13,18 @@ builder.Services.AddSwaggerGen();
 
 builder.Logging.AddConsole();
 
+
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
 
 builder.Services.AddDbContext<EFTappContext>();
 
+var test = builder.Configuration.GetConnectionString("EFTapp");
 
 var app = builder.Build();
+
+app.UseCors(
+    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+    );
 
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 

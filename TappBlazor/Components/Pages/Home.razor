@@ -1,0 +1,62 @@
+﻿@page "/"
+
+<PageTitle>Projecten</PageTitle>
+
+<div class="container mt-5 pt-4">
+    <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+        @if (projectDTOs != null)
+        {
+            foreach (ProjectDTO p in projectDTOs)
+            {
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@p.Naam</h5>
+                        <span class="badge text-bg-secondary">@p.Status.Titel</span>
+                        <p class="card-text">@p.Beschrijving</p>
+
+                        <!-- Ensure each accordion has a unique ID based on the project ID -->
+                        <div class="accordion" id="@($"accordion{p.ProjectId}")">
+
+                            @{
+                                var collapseId = $"collapseContact{p.Organisatie.OrganisatieId}{p.Organisatie.Contactpersonen.ContactpersoonId}";
+                            }
+
+                            <div class="accordion-item">
+                                <p class="d-inline-flex gap-1">
+                                    <a class="accordion-button collapsed" data-bs-toggle="collapse" href="#@collapseId" role="button" aria-expanded="false" aria-controls="@collapseId">
+                                        @p.Organisatie.Contactpersonen.Familienaam.ToUpper() @p.Organisatie.Contactpersonen.Voornaam
+                                    </a>
+                                </p>
+                                <div class="collapse" id="@collapseId">
+                                    <div class="card card-body">
+                                        <p>Telefoon: @p.Organisatie.Contactpersonen.TelefoonNummer</p>
+                                        <p>GSM: @p.Organisatie.Contactpersonen.GSMNummer</p>
+                                        <p>E-mail: @p.Organisatie.Contactpersonen.Email</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Aan het laden...</p>
+        }
+    </div><!--end col-->
+</div>
+
+
+
+@code {
+    [Inject]
+    public ProjectenService projectenService { get; set; }
+    public ICollection<ProjectDTO> projectDTOs { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        projectDTOs = (await projectenService.GetAllProjectenDTOAsync());
+    }
+}

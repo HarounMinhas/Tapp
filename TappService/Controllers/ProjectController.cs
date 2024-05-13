@@ -5,7 +5,7 @@ using Model.Interfaces.Repositories;
 using System;
 
 namespace TappService.Controllers;
-[Route("project")]
+[Route("api/[controller]")]
 [ApiController]
 public class ProjectController : ControllerBase
 {

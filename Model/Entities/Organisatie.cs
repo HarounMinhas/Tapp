@@ -17,7 +17,7 @@ public class Organisatie
     [Required]
     public string Rekeningnummer { get; set; }
 
-    public ICollection<Contactpersoon> Contactpersonen { get; set; }
+    public Contactpersoon Contactpersoon { get; set; }
     public int OrganisatieTypeId { get; set; }
     public OrganisatieType OrganisatieType { get; set; }
     public int AdresId { get; set; }

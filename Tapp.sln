@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{8CD7CC88-CF0F-4A91-A80A-CE21C853D744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TappService", "TappService\TappService.csproj", "{EA7E1F13-1540-4211-8126-829144FB5E22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TappService", "TappService\TappService.csproj", "{EA7E1F13-1540-4211-8126-829144FB5E22}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tapp.Configuration", "Tapp.Configuration\Tapp.Configuration.csproj", "{862E3C08-1BB3-44F9-882B-AF3B7BE9B703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TappBlazor", "TappBlazor\TappBlazor.csproj", "{BE28B224-5C7B-4395-9B7A-4DF48B1546DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{EA7E1F13-1540-4211-8126-829144FB5E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA7E1F13-1540-4211-8126-829144FB5E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA7E1F13-1540-4211-8126-829144FB5E22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862E3C08-1BB3-44F9-882B-AF3B7BE9B703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{862E3C08-1BB3-44F9-882B-AF3B7BE9B703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{862E3C08-1BB3-44F9-882B-AF3B7BE9B703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{862E3C08-1BB3-44F9-882B-AF3B7BE9B703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE28B224-5C7B-4395-9B7A-4DF48B1546DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE28B224-5C7B-4395-9B7A-4DF48B1546DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE28B224-5C7B-4395-9B7A-4DF48B1546DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE28B224-5C7B-4395-9B7A-4DF48B1546DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
