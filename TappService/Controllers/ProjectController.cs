@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using Model.Interfaces.Repositories;
 using System;
+using DAL.Interfaces.Repositories;
+
 
 namespace TappService.Controllers;
 [Route("api/[controller]")]
@@ -13,7 +14,7 @@ public class ProjectController : ControllerBase
 
     public ProjectController(IProjectRepository projectRepository)
     {
-        this._projectRepository = projectRepository?? throw new ArgumentNullException("yah tis hier te doen wi");
+        this._projectRepository = projectRepository;
     }
 
     [HttpGet]

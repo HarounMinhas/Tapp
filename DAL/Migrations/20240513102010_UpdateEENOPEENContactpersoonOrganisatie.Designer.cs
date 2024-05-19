@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Model.Entities;
+using DAL;
 
 #nullable disable
 
 namespace Model.Migrations
 {
     [DbContext(typeof(EFTappContext))]
-    [Migration("20240507112112_Status-Met-CollectieProjectenTakenToDos")]
-    partial class StatusMetCollectieProjectenTakenToDos
+    [Migration("20240513102010_UpdateEENOPEENContactpersoonOrganisatie")]
+    partial class UpdateEENOPEENContactpersoonOrganisatie
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Model.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Models.Entities.Adres", b =>
+            modelBuilder.Entity("Model.Entities.Adres", b =>
                 {
                     b.Property<int>("AdresId")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.Contactpersoon", b =>
+            modelBuilder.Entity("Model.Entities.Contactpersoon", b =>
                 {
                     b.Property<int>("ContactpersoonId")
                         .ValueGeneratedOnAdd()
@@ -150,7 +150,8 @@ namespace Model.Migrations
 
                     b.HasKey("ContactpersoonId");
 
-                    b.HasIndex("OrganisatieId");
+                    b.HasIndex("OrganisatieId")
+                        .IsUnique();
 
                     b.ToTable("Contactpersonen");
 
@@ -203,7 +204,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.DatumUur", b =>
+            modelBuilder.Entity("Model.Entities.DatumUur", b =>
                 {
                     b.Property<int>("DatumUurId")
                         .ValueGeneratedOnAdd()
@@ -228,45 +229,45 @@ namespace Model.Migrations
                         new
                         {
                             DatumUurId = 1,
-                            BeginDatumUur = new DateTime(2024, 5, 7, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1869)
+                            BeginDatumUur = new DateTime(2024, 5, 13, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6292)
                         },
                         new
                         {
                             DatumUurId = 2,
-                            BeginDatumUur = new DateTime(2024, 5, 6, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1914),
-                            EindDatumUur = new DateTime(2024, 5, 8, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1918)
+                            BeginDatumUur = new DateTime(2024, 5, 12, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6333),
+                            EindDatumUur = new DateTime(2024, 5, 14, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6336)
                         },
                         new
                         {
                             DatumUurId = 3,
-                            BeginDatumUur = new DateTime(2024, 5, 7, 11, 21, 11, 917, DateTimeKind.Local).AddTicks(1920)
+                            BeginDatumUur = new DateTime(2024, 5, 13, 10, 20, 9, 601, DateTimeKind.Local).AddTicks(6338)
                         },
                         new
                         {
                             DatumUurId = 4,
-                            BeginDatumUur = new DateTime(2024, 4, 7, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1922),
-                            EindDatumUur = new DateTime(2024, 6, 7, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1931)
+                            BeginDatumUur = new DateTime(2024, 4, 13, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6340),
+                            EindDatumUur = new DateTime(2024, 6, 13, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6343)
                         },
                         new
                         {
                             DatumUurId = 5,
-                            BeginDatumUur = new DateTime(2024, 4, 27, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1933),
-                            EindDatumUur = new DateTime(2024, 5, 7, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1935)
+                            BeginDatumUur = new DateTime(2024, 5, 3, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6344),
+                            EindDatumUur = new DateTime(2024, 5, 13, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6346)
                         },
                         new
                         {
                             DatumUurId = 6,
-                            BeginDatumUur = new DateTime(2024, 5, 9, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1937)
+                            BeginDatumUur = new DateTime(2024, 5, 15, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6347)
                         },
                         new
                         {
                             DatumUurId = 7,
-                            BeginDatumUur = new DateTime(2024, 3, 7, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1938),
-                            EindDatumUur = new DateTime(2024, 4, 7, 13, 21, 11, 917, DateTimeKind.Local).AddTicks(1940)
+                            BeginDatumUur = new DateTime(2024, 3, 13, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6349),
+                            EindDatumUur = new DateTime(2024, 4, 13, 12, 20, 9, 601, DateTimeKind.Local).AddTicks(6351)
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.Label", b =>
+            modelBuilder.Entity("Model.Entities.Label", b =>
                 {
                     b.Property<int>("LabelId")
                         .ValueGeneratedOnAdd()
@@ -319,7 +320,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.Organisatie", b =>
+            modelBuilder.Entity("Model.Entities.Organisatie", b =>
                 {
                     b.Property<int>("OrganisatieId")
                         .ValueGeneratedOnAdd()
@@ -401,7 +402,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.OrganisatieType", b =>
+            modelBuilder.Entity("Model.Entities.OrganisatieType", b =>
                 {
                     b.Property<int>("OrganisatieTypeId")
                         .ValueGeneratedOnAdd()
@@ -445,7 +446,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.Project", b =>
+            modelBuilder.Entity("Model.Entities.Project", b =>
                 {
                     b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd()
@@ -528,7 +529,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.Status", b =>
+            modelBuilder.Entity("Model.Entities.Status", b =>
                 {
                     b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd()
@@ -569,7 +570,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.Taak", b =>
+            modelBuilder.Entity("Model.Entities.Taak", b =>
                 {
                     b.Property<int>("TaakId")
                         .ValueGeneratedOnAdd()
@@ -712,7 +713,7 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.ToDo", b =>
+            modelBuilder.Entity("Model.Entities.ToDo", b =>
                 {
                     b.Property<int>("ToDoId")
                         .ValueGeneratedOnAdd()
@@ -855,26 +856,26 @@ namespace Model.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Entities.Contactpersoon", b =>
+            modelBuilder.Entity("Model.Entities.Contactpersoon", b =>
                 {
-                    b.HasOne("Models.Entities.Organisatie", "Organisatie")
-                        .WithMany("Contactpersonen")
-                        .HasForeignKey("OrganisatieId")
+                    b.HasOne("Model.Entities.Organisatie", "Organisatie")
+                        .WithOne("Contactpersoon")
+                        .HasForeignKey("Model.Entities.Contactpersoon", "OrganisatieId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Organisatie");
                 });
 
-            modelBuilder.Entity("Models.Entities.Organisatie", b =>
+            modelBuilder.Entity("Model.Entities.Organisatie", b =>
                 {
-                    b.HasOne("Models.Entities.Adres", "Adres")
+                    b.HasOne("Model.Entities.Adres", "Adres")
                         .WithMany()
                         .HasForeignKey("AdresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.Entities.OrganisatieType", "OrganisatieType")
+                    b.HasOne("Model.Entities.OrganisatieType", "OrganisatieType")
                         .WithMany()
                         .HasForeignKey("OrganisatieTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -885,19 +886,19 @@ namespace Model.Migrations
                     b.Navigation("OrganisatieType");
                 });
 
-            modelBuilder.Entity("Models.Entities.Project", b =>
+            modelBuilder.Entity("Model.Entities.Project", b =>
                 {
-                    b.HasOne("Models.Entities.DatumUur", "DatumUur")
+                    b.HasOne("Model.Entities.DatumUur", "DatumUur")
                         .WithMany()
                         .HasForeignKey("DatumUurId");
 
-                    b.HasOne("Models.Entities.Organisatie", "Organisatie")
+                    b.HasOne("Model.Entities.Organisatie", "Organisatie")
                         .WithMany()
                         .HasForeignKey("OrganisatieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.Entities.Status", "Status")
+                    b.HasOne("Model.Entities.Status", "Status")
                         .WithMany("Projecten")
                         .HasForeignKey("StatusId");
 
@@ -908,24 +909,24 @@ namespace Model.Migrations
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("Models.Entities.Taak", b =>
+            modelBuilder.Entity("Model.Entities.Taak", b =>
                 {
-                    b.HasOne("Models.Entities.DatumUur", "DatumUur")
+                    b.HasOne("Model.Entities.DatumUur", "DatumUur")
                         .WithMany()
                         .HasForeignKey("DatumUurId");
 
-                    b.HasOne("Models.Entities.Label", "Label")
+                    b.HasOne("Model.Entities.Label", "Label")
                         .WithMany("Taken")
                         .HasForeignKey("LabelId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Models.Entities.Project", "Project")
+                    b.HasOne("Model.Entities.Project", "Project")
                         .WithMany("Taken")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.Entities.Status", "Status")
+                    b.HasOne("Model.Entities.Status", "Status")
                         .WithMany("Taken")
                         .HasForeignKey("StatusId");
 
@@ -938,22 +939,22 @@ namespace Model.Migrations
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("Models.Entities.ToDo", b =>
+            modelBuilder.Entity("Model.Entities.ToDo", b =>
                 {
-                    b.HasOne("Models.Entities.DatumUur", "DatumUur")
+                    b.HasOne("Model.Entities.DatumUur", "DatumUur")
                         .WithMany()
                         .HasForeignKey("DatumUurId");
 
-                    b.HasOne("Models.Entities.Label", "Label")
+                    b.HasOne("Model.Entities.Label", "Label")
                         .WithMany("ToDos")
                         .HasForeignKey("LabelId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Models.Entities.Status", "Status")
+                    b.HasOne("Model.Entities.Status", "Status")
                         .WithMany("ToDos")
                         .HasForeignKey("StatusId");
 
-                    b.HasOne("Models.Entities.Taak", "Taak")
+                    b.HasOne("Model.Entities.Taak", "Taak")
                         .WithMany("ToDos")
                         .HasForeignKey("TaakId")
                         .IsRequired();
@@ -967,24 +968,25 @@ namespace Model.Migrations
                     b.Navigation("Taak");
                 });
 
-            modelBuilder.Entity("Models.Entities.Label", b =>
+            modelBuilder.Entity("Model.Entities.Label", b =>
                 {
                     b.Navigation("Taken");
 
                     b.Navigation("ToDos");
                 });
 
-            modelBuilder.Entity("Models.Entities.Organisatie", b =>
+            modelBuilder.Entity("Model.Entities.Organisatie", b =>
                 {
-                    b.Navigation("Contactpersonen");
+                    b.Navigation("Contactpersoon")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Models.Entities.Project", b =>
+            modelBuilder.Entity("Model.Entities.Project", b =>
                 {
                     b.Navigation("Taken");
                 });
 
-            modelBuilder.Entity("Models.Entities.Status", b =>
+            modelBuilder.Entity("Model.Entities.Status", b =>
                 {
                     b.Navigation("Projecten");
 
@@ -993,7 +995,7 @@ namespace Model.Migrations
                     b.Navigation("ToDos");
                 });
 
-            modelBuilder.Entity("Models.Entities.Taak", b =>
+            modelBuilder.Entity("Model.Entities.Taak", b =>
                 {
                     b.Navigation("ToDos");
                 });

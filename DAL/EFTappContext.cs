@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Tapp.Configuration;
-
-namespace Model.Entities;
+using Model.Entities;
+namespace DAL;
 
 public class EFTappContext : DbContext
 {
@@ -25,8 +25,10 @@ public class EFTappContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        //BELANGRIJK, EFTappContextFactory geimplementeerd voor gebruik van EF CORE TOOLS
+
         var namespaceName = Assembly.GetExecutingAssembly().GetName().Name;
-        //hier kan ook statisch geopteerd worden voor "Model", maar maakt het wat onafhankelijker van elkaar
+        //hier kan ook statisch geopteerd worden voor "DAL", maar maakt het wat onafhankelijker van elkaar
         Configuration = ConfigurationHelper.BuildConfigurationAppSettings(namespaceName);
 
 

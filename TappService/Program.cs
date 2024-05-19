@@ -1,8 +1,9 @@
 
 using Microsoft.Extensions.Configuration;
 using Model.Entities;
-using Model.Interfaces.Repositories;
+using DAL.Interfaces.Repositories;
 using Model.Repositories;
+using DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
@@ -18,7 +19,7 @@ builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
 
 builder.Services.AddDbContext<EFTappContext>();
 
-var test = builder.Configuration.GetConnectionString("EFTapp");
+//var test = builder.Configuration.GetConnectionString("EFTapp");
 
 var app = builder.Build();
 

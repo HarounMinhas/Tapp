@@ -2,51 +2,122 @@
 
 <PageTitle>Projecten</PageTitle>
 
-<div class="container mt-5 pt-4">
-    <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-        @if (projectDTOs != null)
-        {
-            foreach (ProjectDTO p in projectDTOs)
-            {
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">@p.Naam</h5>
-                        <span class="badge text-bg-secondary">@p.Status.Titel</span>
-                        <p class="card-text">@p.Beschrijving</p>
+<section class="position-relative py-4 py-xl-5">
+    <div class="container position-relative">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col">
+                            <div class="gradient-overlay top-overlay"></div> <!-- Top gradient overlay -->
+                            <div class="overflow-auto" style="max-height: 500px;">
+                                <!-- Set a max-height and overflow-auto -->
+                                @if (projectDTOs != null)
+                                {
+                                    foreach (ProjectDTO p in projectDTOs)
+                                    {
 
-                        <!-- Ensure each accordion has a unique ID based on the project ID -->
-                        <div class="accordion" id="@($"accordion{p.ProjectId}")">
+                                        string contactPersoon = $"ContactInfo{p.Organisatie.Contactpersonen.ContactpersoonId}";
+                                        string badgeKleur = String.Empty;
+                                        if(p.Status != null)
+                                        {
+                                            @switch (p.Status.StatusId)
+                                            {
+                                                case 1:
+                                                    badgeKleur = "text-bg-success";
+                                                    break;
+                                                case 2:
+                                                    badgeKleur = "text-bg-dark";
+                                                    break;
+                                                case 3:
+                                                    badgeKleur = "text-bg-warning";
+                                                    break;
+                                                default:
+                                                    badgeKleur = "text-bg-light";
+                                                    break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //just in case er iets moet gebeuren
+                                        }
 
-                            @{
-                                var collapseId = $"collapseContact{p.Organisatie.OrganisatieId}{p.Organisatie.Contactpersonen.ContactpersoonId}";
-                            }
 
-                            <div class="accordion-item">
-                                <p class="d-inline-flex gap-1">
-                                    <a class="accordion-button collapsed" data-bs-toggle="collapse" href="#@collapseId" role="button" aria-expanded="false" aria-controls="@collapseId">
-                                        @p.Organisatie.Contactpersonen.Familienaam.ToUpper() @p.Organisatie.Contactpersonen.Voornaam
-                                    </a>
-                                </p>
-                                <div class="collapse" id="@collapseId">
-                                    <div class="card card-body">
-                                        <p>Telefoon: @p.Organisatie.Contactpersonen.TelefoonNummer</p>
-                                        <p>GSM: @p.Organisatie.Contactpersonen.GSMNummer</p>
-                                        <p>E-mail: @p.Organisatie.Contactpersonen.Email</p>
-                                    </div>
-                                </div>
+
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <i class="bi bi-diagram-3"></i> @p.Naam
+                                                    <span class="badge @badgeKleur float-end">@p.Status.Titel</span>
+                                                </h5>
+                                                <p class="card-text">@p.Beschrijving</p>
+                                                <a class="text-primary d-block styled-link" style="cursor: pointer;" data-bs-toggle="collapse" href="#@contactPersoon" aria-expanded="false" aria-controls="@contactPersoon">
+                                                    <i class="bi bi-chevron-down"></i> Contactpersoon
+                                                </a>
+                                                <div class="collapse" id="@contactPersoon">
+                                                    <ul class="list-group list-group-flush mt-2">
+                                                        <li class="list-group-item">@p.Organisatie.Contactpersonen.Familienaam.ToUpper() @p.Organisatie.Contactpersonen.Voornaam</li>
+                                                        <li class="list-group-item">TEL: @p.Organisatie.Contactpersonen.TelefoonNummer</li>
+                                                        <li class="list-group-item">GSM: @p.Organisatie.Contactpersonen.GSMNummer</li>
+                                                        <li class="list-group-item">Email: @p.Organisatie.Contactpersonen.Email</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    @* Placeholders nog aan te passen *@
+                                    <PlaceholderContainer Animation="PlaceholderAnimation.Glow">
+                                        <Placeholder Width="PlaceholderWidth.Col12" />
+                                        <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Large" />
+                                        <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Small" />
+                                        <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.ExtraSmall" />
+                                    </PlaceholderContainer>
+
+                                    <br />
+                                    <br />
+
+                                    <PlaceholderContainer Animation="PlaceholderAnimation.Wave">
+                                        <Placeholder Width="PlaceholderWidth.Col12" />
+                                        <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Large" />
+                                        <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Small" />
+                                        <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.ExtraSmall" />
+                                    </PlaceholderContainer>
+                                }
+                            </div> <!-- end overflow-auto -->
+                            <div class="gradient-overlay bottom-overlay"></div> <!-- Bottom gradient overlay -->
+
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end container -->
+            </div><!-- end col -->
+
+            <div class="col-xl-6">
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col">
+                            <div class="gradient-overlay top-overlay"></div> <!-- Top gradient overlay -->
+                            <div class="overflow-auto" style="max-height: 500px;">
+                                <!-- zet maximum hoogte (voorlopig) en overflow-auto -->
+                                <PlaceholderContainer Animation="PlaceholderAnimation.Glow">
+                                    <Placeholder Width="PlaceholderWidth.Col12" />
+                                    <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Large" />
+                                    <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Small" />
+                                    <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.ExtraSmall" />
+                                </PlaceholderContainer>
+
                             </div>
-
                         </div>
                     </div>
                 </div>
-            }
-        }
-        else
-        {
-            <p>Aan het laden...</p>
-        }
-    </div><!--end col-->
-</div>
+            </div>
+        </div> @* End row *@
+    </div> @* End container position *@
+</section>
+
+
 
 
 

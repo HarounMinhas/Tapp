@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Model.Interfaces.Repositories;
+using DAL.Interfaces.Repositories;
 using Model.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model.DTOs;
+using DAL;
 
 namespace Model.Repositories;
 public class ProjectRepository : IProjectRepository

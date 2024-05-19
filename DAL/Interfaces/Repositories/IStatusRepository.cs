@@ -1,6 +1,6 @@
 ﻿using Model.Entities;
 
-namespace Model.Interfaces.Repositories;
+namespace DAL.Interfaces.Repositories;
 
 public interface IStatusRepository
 {
