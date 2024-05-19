@@ -11,7 +11,7 @@ public static class ConfigurationHelper
 {
     public static IConfigurationRoot BuildConfigurationAppSettings(string basePath)
     {
-        var test = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\"+ basePath;
+        var test = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName + "\\"+ basePath;
 
         return new ConfigurationBuilder()
             .SetBasePath(test)
