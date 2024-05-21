@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Model.DTOs;
 using DAL;
 
-namespace Model.Repositories;
+namespace DAL.Repositories;
 public class ProjectRepository : IProjectRepository
 {
     private readonly EFTappContext _dbContext;

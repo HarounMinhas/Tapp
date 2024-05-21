@@ -19,7 +19,7 @@
 
                                         string contactPersoon = $"ContactInfo{p.Organisatie.Contactpersonen.ContactpersoonId}";
                                         string badgeKleur = String.Empty;
-                                        if(p.Status != null)
+                                        if (p.Status != null)
                                         {
                                             @switch (p.Status.StatusId)
                                             {
@@ -54,6 +54,9 @@
                                                 <a class="text-primary d-block styled-link" style="cursor: pointer;" data-bs-toggle="collapse" href="#@contactPersoon" aria-expanded="false" aria-controls="@contactPersoon">
                                                     <i class="bi bi-chevron-down"></i> Contactpersoon
                                                 </a>
+                                                <button class="btn btn-primary m-3" @onclick="()=> SetSelectedProjectId(p.ProjectId)"> Toon taken </button>
+                                                <button class="btn btn-primary m-3" @onclick="Verander"> Verander auteur </button>
+
                                                 <div class="collapse" id="@contactPersoon">
                                                     <ul class="list-group list-group-flush mt-2">
                                                         <li class="list-group-item">@p.Organisatie.Contactpersonen.Familienaam.ToUpper() @p.Organisatie.Contactpersonen.Voornaam</li>
@@ -101,12 +104,8 @@
                             <div class="gradient-overlay top-overlay"></div> <!-- Top gradient overlay -->
                             <div class="overflow-auto" style="max-height: 500px;">
                                 <!-- zet maximum hoogte (voorlopig) en overflow-auto -->
-                                <PlaceholderContainer Animation="PlaceholderAnimation.Glow">
-                                    <Placeholder Width="PlaceholderWidth.Col12" />
-                                    <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Large" />
-                                    <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.Small" />
-                                    <Placeholder Width="PlaceholderWidth.Col12" Size="PlaceholderSize.ExtraSmall" />
-                                </PlaceholderContainer>
+                                <!-- hier komen de taken-->
+                                <TakenOverzicht ProjectId="selectedProjectId"  />
 
                             </div>
                         </div>
@@ -123,11 +122,28 @@
 
 @code {
     [Inject]
-    public ProjectenService projectenService { get; set; }
+    private ProjectenService projectenService { get; set; }
+
     public ICollection<ProjectDTO> projectDTOs { get; set; }
+    public int selectedProjectId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        projectDTOs = (await projectenService.GetAllProjectenDTOAsync());
+        projectDTOs = await projectenService.GetAllProjectenDTOAsync();
     }
+
+    private void SetSelectedProjectId(int projectId)
+    {
+        selectedProjectId = projectId;
+        Console.WriteLine($"SetSelectedProjectId called with ProjectId: {projectId}"); // Debugging line
+
+        StateHasChanged(); // Notify Blazor that the state has changed
+    }
+    private void HandleProjectIdChanged(int newProjectId)
+    {
+        selectedProjectId = newProjectId;
+        StateHasChanged(); // Notify Blazor that the state has changed
+    }
+
+    private void Verander() => Console.WriteLine("Verander auteur");
 }

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Model.Entities;
 using DAL.Interfaces.Repositories;
-using Model.Repositories;
+using DAL.Repositories;
 using DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +16,7 @@ builder.Logging.AddConsole();
 
 
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
+builder.Services.AddScoped<ITaakRepository, TaakRepository>();
 
 builder.Services.AddDbContext<EFTappContext>();
 

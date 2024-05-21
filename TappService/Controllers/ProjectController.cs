@@ -20,8 +20,9 @@ public class ProjectController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
-        var test = (await _projectRepository.GetAllInDTOAsync());
+        var projectenDTO = (await _projectRepository.GetAllInDTOAsync());
 
-        return base.Ok(test);
+        return base.Ok(projectenDTO);
     }
+
 }
