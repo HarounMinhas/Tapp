@@ -1,0 +1,54 @@
+﻿
+@*
+	Deze onderdeel splitsen. Deze component geeft een overzicht van alle projecten weer.
+	De gebruiker kan op een project klikken en de taken van dat project bekijken.
+*@
+
+<PageTitle>Projecten</PageTitle>
+
+
+@if (projectDTOs != null)
+{
+    foreach (ProjectDTO project in projectDTOs)
+    {
+        <Projecten p="project" OnProjectSelected="SetSelectedProjectId" />
+       
+    }
+}
+else
+{
+
+}
+
+
+
+
+
+
+@code {
+    [Inject]
+    private ProjectenService projectenService { get; set; }
+
+    public ICollection<ProjectDTO> projectDTOs { get; set; }
+
+    [Parameter]
+    public int selectedProjectId { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnProjectSelectedOverzicht { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        projectDTOs = await projectenService.GetAllProjectenDTOAsync();
+    }
+
+
+    private void SetSelectedProjectId(int projectId)
+    {
+        selectedProjectId = projectId;
+        OnProjectSelectedOverzicht.InvokeAsync(selectedProjectId);
+    }
+   
+}

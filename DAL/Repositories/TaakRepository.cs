@@ -33,6 +33,8 @@ public class TaakRepository : ITaakRepository
             .ThenInclude(todo=> todo.DatumUur)
             .Include(t => t.ToDos)
             .ThenInclude(todo => todo.Label)
+            .Include(t => t.ToDos)
+             .ThenInclude(todo => todo.Status)
             .Include(t => t.DatumUur)
             .Include(t => t.Label)
             .Where(t => t.ProjectId == projectId).ToListAsync());

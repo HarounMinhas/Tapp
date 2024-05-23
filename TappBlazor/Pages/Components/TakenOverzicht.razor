@@ -18,23 +18,17 @@ else
 @code {
     [Parameter]
     public int ProjectId { get; set; }
-    [Parameter]
-    public EventCallback<int> OnProjectIdChanged { get; set; }
 
     [Inject]
     private TakenService takenService { get; set; }
 
-    public ICollection<TaakDTO>? TakenDTOs { get; set; }
+    private ICollection<TaakDTO>? TakenDTOs { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine($"OnParametersSetAsync called with ProjectId: {ProjectId}"); // Debugging line
-
         if (ProjectId != 0)
         {
             TakenDTOs = await takenService.GetAllTakenDTOByProjectIdAsync(ProjectId);
-            await OnProjectIdChanged.InvokeAsync(ProjectId);
-            Console.WriteLine($"Fetched {TakenDTOs.Count} tasks for ProjectId: {ProjectId}"); // Debugging line
         }
     }
 }

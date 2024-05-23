@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tapp.Configuration", "Tapp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{A21D8DC4-543F-4442-B977-2D67513CB448}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TappBlazor", "TappBlazor\TappBlazor.csproj", "{54CAAC60-F366-4299-AB49-C5D5D205EAA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TappBlazor", "TappBlazor\TappBlazor.csproj", "{54CAAC60-F366-4299-AB49-C5D5D205EAA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

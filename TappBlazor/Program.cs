@@ -3,7 +3,6 @@ using DAL.Repositories;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Model.Entities;
-using TappBlazor.Data;
 using TappBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
+
 builder.Services.AddTransient<ProjectenService>();
+builder.Services.AddTransient<TakenService>();
 builder.Services.AddSingleton(
     new HttpClient { BaseAddress = new Uri("http://localhost:5213") }
     );
+
+builder.Services.AddBlazorBootstrap();
 
 var app = builder.Build();
 
