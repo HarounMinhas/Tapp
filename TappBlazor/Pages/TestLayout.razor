@@ -1,0 +1,98 @@
+﻿@page "/dashboard"
+
+@* Dashboard Layout *@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-3 bg-dark text-white sidebar">
+            <div class="p-4">
+                <h4>Hi Samantha</h4>
+                <p>Welcome back to the workspace, we missed You!</p>
+                <input type="text" class="form-control mb-3" placeholder="Search for projects">
+                <h5>Projects</h5>
+                <div class="project-cards mt-3">
+                    <div class="card bg-primary text-white mb-3">
+                        <div class="card-body">
+                            GH
+                        </div>
+                    </div>
+                    <div class="card bg-success text-white mb-3">
+                        <div class="card-body">
+                            CP
+                        </div>
+                    </div>
+                    <div class="card bg-info text-white mb-3">
+                        <div class="card-body">
+                            EC
+                        </div>
+                    </div>
+                    <div class="card bg-warning text-white mb-3">
+                        <div class="card-body">
+                            TA
+                        </div>
+                    </div>
+                    <div class="card bg-danger text-white mb-3">
+                        <div class="card-body">
+                            LP
+                        </div>
+                    </div>
+                    <div class="card bg-secondary text-white mb-3">
+                        <div class="card-body">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-9 main-content">
+            <div class="p-4">
+                <h4>Cyber Punk</h4>
+                <div class="avatar-group mb-3">
+                    <img src="https://via.placeholder.com/40" class="rounded-circle" alt="Avatar">
+                    <img src="https://via.placeholder.com/40" class="rounded-circle" alt="Avatar">
+                    <img src="https://via.placeholder.com/40" class="rounded-circle" alt="Avatar">
+                    <img src="https://via.placeholder.com/40" class="rounded-circle" alt="Avatar">
+                </div>
+                <h5>Today</h5>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Create a main illustration
+                        <span class="badge badge-primary badge-pill">Done</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Develop a user experience
+                        <span class="badge badge-secondary badge-pill">In Progress</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Test the application
+                        <span class="badge badge-success badge-pill">To Do</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Debug the issues
+                        <span class="badge badge-danger badge-pill">Blocked</span>
+                    </li>
+                </ul>
+                <h5>Upcoming</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Create a wireframe
+                        <span class="badge badge-primary badge-pill">To Do</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Set up the meeting
+                        <span class="badge badge-secondary badge-pill">In Progress</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Deploy the application
+                        <span class="badge badge-success badge-pill">To Do</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    // Add any necessary C# code here
+}

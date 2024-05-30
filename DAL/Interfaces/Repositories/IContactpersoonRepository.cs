@@ -1,16 +1,17 @@
-﻿using Model.Entities;
+﻿using Model.DTOs;
+using Model.Entities;
 
 namespace DAL.Interfaces.Repositories;
 
 public interface IContactpersoonRepository
 {
-    Task<Contactpersoon> GetByIdAsync(int id);
+    Task<ContactPersoonDTO> GetByIdAsync(int id);
 
-    Task<ICollection<Contactpersoon>> GetAllAsync();
+    Task<ICollection<ContactPersoonDTO>> GetAllAsync();
 
-    Task<Contactpersoon> CreateAsync(Contactpersoon contactpersoon);
+    Task<ContactPersoonDTO> CreateAsync(Contactpersoon contactpersoon);
 
-    Task<Contactpersoon> UpdateAsync(Contactpersoon contactpersoon);
+    Task<ContactPersoonDTO> UpdateAsync(Contactpersoon contactpersoon);
 
     Task DeleteAsync(int id);
 }

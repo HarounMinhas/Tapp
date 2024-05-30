@@ -4,28 +4,58 @@
     contactPersoon = $"ContactInfo{p.Organisatie.Contactpersonen.ContactpersoonId}";
     badgeKleur = OpmaakBase.GetBadgeKleur(p.Status?.StatusId ?? 0).ToLower();
 }
-<div class="mb-4">
-    <div class="card p-4" @onclick="() => SetSelectedProjectId(p.ProjectId)"
-         style="cursor: pointer; @cardStyle"
+
+@if (CardWeergaveHorizontaal)
+{
+
+}
+else
+{
+
+    <div class="mb-4"
          @onmouseover="() => OnMouseOver(true)"
          @onmouseout="() => OnMouseOver(false)">
-        <div class="d-flex align-items-center">
-            <h4 class="mb-0 me-2">@p.Naam</h4>
-            <span class="badge rounded-pill @badgeKleur">@p.Status?.Titel</span>
+
+        <div class="card p-4 w-50" style="@cardStyle">
+            <div @onclick="() => SetSelectedProjectId(p.ProjectId)" style="cursor: pointer; ">
+                <div class="d-flex align-items-center">
+                    <h4 class="mb-0 me-2">@p.Naam</h4>
+                    <span class="badge rounded-pill @badgeKleur">@p.Status?.Titel</span>
+                </div>
+                <p>
+                    @p.Beschrijving
+                </p>
+
+            </div><ul class="list-group">
+                @if (p.DatumUur.BeginDatumUur != null)
+                {
+                    <li class="list-group-item"><small>Start datum: @p.DatumUur.BeginDatumUur.Value.ToShortDateString()</small></li>
+                }
+
+                @if (p.DatumUur.EindDatumUur != null)
+                {
+                    <li class="list-group-item"><small>Deadline op: @p.DatumUur.EindDatumUur.Value.ToShortDateString()</small></li>
+                }
+
+
+                @if (p.DatumUur.AfgerondDatumUur != null)
+                {
+                    <li class="list-group-item active" aria-current="true"><small>Afgerond op: @p.DatumUur.AfgerondDatumUur.Value.ToShortDateString()</small></li>
+                }
+
+            </ul>
+            <button type="button" class="btn btn-outline-info w-100" data-bs-toggle="modal" data-bs-target="@($"#{modalNaam}")">
+                Contactgegevens
+            </button>
         </div>
-        <p>
-            @p.Beschrijving
-        </p>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="@($"#{modalNaam}")">
-            Contactgegevens
-        </button>
+
+
+        @{
+
+            modalNaam = $"ContactgegevensModal{p.Organisatie.Contactpersonen.ContactpersoonId}";
+        }
     </div>
-    @{
-
-        modalNaam = $"ContactgegevensModal{p.Organisatie.Contactpersonen.ContactpersoonId}";
-    }
-
 
     <div class="modal fade" id="@modalNaam" tabindex="-1" aria-labelledby="ContactgegevensModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -57,7 +87,9 @@
             </div>
         </div>
     </div>
-</div>
+
+
+}
 
 
 
@@ -90,12 +122,14 @@
 @code {
     [Parameter]
     public ProjectDTO p { get; set; }
+    [Parameter]
+    public bool CardWeergaveHorizontaal { get; set; }
 
     string contactPersoon = String.Empty;
     string badgeKleur = String.Empty;
     string modalNaam = String.Empty;
 
-    private string cardStyle = String.Empty;
+    private string cardStyle = "background-color: inherit";
 
     [Parameter]
     public int selectedProjectId { get; set; }
@@ -112,6 +146,6 @@
 
     private void OnMouseOver(bool isMouseOver)
     {
-        cardStyle = isMouseOver ? "background-color: #EEEEEE;" : "";
+        cardStyle = isMouseOver ? "background-color: #EEEEEE;" : "background-color: inherit";
     }
 }

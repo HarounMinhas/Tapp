@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Logging.AddConsole();
 
-
+builder.Services.AddScoped<IContactpersoonRepository, ContactpersoonRepository>();
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
 builder.Services.AddScoped<ITaakRepository, TaakRepository>();
 

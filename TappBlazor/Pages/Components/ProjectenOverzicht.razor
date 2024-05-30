@@ -6,12 +6,123 @@
 
 <PageTitle>Projecten</PageTitle>
 
+    @* <div style="background: #ffffff;">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Offcanvas - enable scrolling</button>
+        <div id="offcanvasWithBothOptions" class="offcanvas offcanvas-top visible show" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="true" aria-controls="offcanvasScrolling" aria-labelledby="offcanvasWithBothOptionsLabel" style="width: auto;height: 300px;color: rgba(33,37,41,0.25);background: linear-gradient(#ffffff, rgba(255,255,255,0)), rgba(255,255,255,0.56);">
+            <div class="offcanvas-header">
+                <h5 id="offcanvasWithBothOptionsLabel" class="offcanvas-title" style="color: rgb(0,0,0);">Backdrop with scrolling</h5><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div id="offcanvasBody" class="offcanvas-body" style="overflow-x: scroll;display: flex;flex-wrap: nowrap;">
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">John Doe</h4><span class="badge rounded-pill bg-success">Active</span>
+                            </div>
+                            <p>This is a sample description for the item.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Jane Smith</h4><span class="badge rounded-pill bg-warning">Pending</span>
+                            </div>
+                            <p>Sample text for another description goes here.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Alice Johnson</h4><span class="badge rounded-pill bg-primary">Completed</span>
+                            </div>
+                            <p>Another example description for a task or project.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Bob Brown</h4><span class="badge rounded-pill bg-danger">Overdue</span>
+                            </div>
+                            <p>Description for an overdue item.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Charlie Davis</h4><span class="badge rounded-pill bg-info">Review</span>
+                            </div>
+                            <p>Item description needing review.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Dana Evans</h4><span class="badge rounded-pill bg-success">Active</span>
+                            </div>
+                            <p>Description for an active project.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Emily Foster</h4><span class="badge rounded-pill bg-warning">Pending</span>
+                            </div>
+                            <p>Pending task description here.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Frank Green</h4><span class="badge rounded-pill bg-primary">Completed</span>
+                            </div>
+                            <p>Details about the completed task.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Grace Hall</h4><span class="badge rounded-pill bg-danger">Overdue</span>
+                            </div>
+                            <p>Description for overdue project.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="card p-4" style="margin-right: 25px;">
+                        <div style="cursor: pointer;">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0 me-2">Hannah Ivy</h4><span class="badge rounded-pill bg-info">Review</span>
+                            </div>
+                            <p>Description for a task under review.</p>
+                        </div><button class="btn btn-outline-info w-100" type="button">Contactgegevens</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ *@
 
 @if (projectDTOs != null)
 {
     foreach (ProjectDTO project in projectDTOs)
     {
-        <Projecten p="project" OnProjectSelected="SetSelectedProjectId" />
+        <Projecten p="project" OnProjectSelected="SetSelectedProjectId" CardWeergaveHorizontaal="false" />
        
     }
 }
@@ -41,7 +152,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        projectDTOs = await projectenService.GetAllProjectenDTOAsync();
+        projectDTOs = await projectenService.GetProjectDTOByContactpersoon("ja");//.GetAllProjectenDTOAsync();
     }
 
 
