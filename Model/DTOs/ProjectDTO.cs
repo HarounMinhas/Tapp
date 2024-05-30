@@ -1,6 +1,4 @@
-﻿using Model.Entities;
-
-namespace Model.DTOs
+﻿namespace Model.DTOs
 {
     public class ProjectDTO
     {
@@ -10,7 +8,5 @@ namespace Model.DTOs
         public DatumUurDTO DatumUur { get; set; }
         public string Naam { get; set; }
         public string Beschrijving { get; set; }
-        
-
     }
 }

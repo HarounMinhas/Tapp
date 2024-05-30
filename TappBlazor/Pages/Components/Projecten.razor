@@ -16,7 +16,7 @@ else
          @onmouseover="() => OnMouseOver(true)"
          @onmouseout="() => OnMouseOver(false)">
 
-        <div class="card p-4 w-50" style="@cardStyle">
+        <div class="card p-4 " style="@cardStyle">
             <div @onclick="() => SetSelectedProjectId(p.ProjectId)" style="cursor: pointer; ">
                 <div class="d-flex align-items-center">
                     <h4 class="mb-0 me-2">@p.Naam</h4>

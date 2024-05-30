@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using DAL;
 
 namespace DAL.Factories;
+
 public class EFTappContextFactory : IDesignTimeDbContextFactory<EFTappContext>
 {
     public EFTappContext CreateDbContext(string[] args)

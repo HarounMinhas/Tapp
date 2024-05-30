@@ -12,12 +12,15 @@ public class OpmaakBase : ComponentBase
             case 1:
                 badgeKleur = "bg-success";
                 break;
+
             case 2:
                 badgeKleur = "bg-dark";
                 break;
+
             case 3:
                 badgeKleur = "bg-warning";
                 break;
+
             default:
                 badgeKleur = "bg-light";
                 break;

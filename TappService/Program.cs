@@ -1,16 +1,12 @@
-
-using Microsoft.Extensions.Configuration;
-using Model.Entities;
+using DAL;
 using DAL.Interfaces.Repositories;
 using DAL.Repositories;
-using DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 builder.Logging.AddConsole();
 
@@ -42,8 +38,6 @@ catch (Exception ex)
     throw;
 }
 
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -56,6 +50,5 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();  //Map alles controller routes
 });
-
 
 app.Run();

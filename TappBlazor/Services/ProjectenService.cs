@@ -1,6 +1,5 @@
 ﻿using Model.DTOs;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace TappBlazor.Services;
 
@@ -13,7 +12,6 @@ public class ProjectenService
         _httpClient = httpClient;
     }
 
-
     public async Task<ICollection<ProjectDTO>> GetAllProjectenDTOAsync()
     {
         var projectAPIString = await _httpClient.GetStringAsync("api/project");
@@ -24,7 +22,6 @@ public class ProjectenService
         };
 
         return JsonSerializer.Deserialize<ICollection<ProjectDTO>>(projectAPIString, options)!;
-        
     }
 
     public async Task<ICollection<ProjectDTO>> GetProjectDTOByContactpersoon(String contactpersoonNaam)
@@ -38,7 +35,5 @@ public class ProjectenService
         };
 
         return JsonSerializer.Deserialize<ICollection<ProjectDTO>>(projectAPIString, options)!;
-
     }
-
 }

@@ -1,15 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using DAL.Interfaces.Repositories;
+﻿using DAL.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Model.DTOs;
 using Model.Entities;
 
 namespace DAL.Repositories;
+
 public class TaakRepository : ITaakRepository
 {
     private readonly EFTappContext _dbContext;
+
     public TaakRepository(EFTappContext eFTappContext)
     {
         _dbContext = eFTappContext;
@@ -30,7 +29,7 @@ public class TaakRepository : ITaakRepository
         var alleTaken = (await _dbContext.Taken
             .Include(t => t.Status)
             .Include(t => t.ToDos)
-            .ThenInclude(todo=> todo.DatumUur)
+            .ThenInclude(todo => todo.DatumUur)
             .Include(t => t.ToDos)
             .ThenInclude(todo => todo.Label)
             .Include(t => t.ToDos)
@@ -97,7 +96,6 @@ public class TaakRepository : ITaakRepository
     {
         throw new NotImplementedException();
     }
-
 
     public Task<Taak> GetByTitelAsync(string titel)
     {

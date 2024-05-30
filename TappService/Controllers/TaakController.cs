@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using DAL.Interfaces.Repositories;
+﻿using DAL.Interfaces.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TappService.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class TaakController : ControllerBase

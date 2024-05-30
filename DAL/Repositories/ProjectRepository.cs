@@ -1,19 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DAL.Interfaces.Repositories;
-using Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Model.DTOs;
-using DAL;
-using System.Collections.ObjectModel;
+using Model.Entities;
 
 namespace DAL.Repositories;
+
 public class ProjectRepository : IProjectRepository
 {
     private readonly EFTappContext _dbContext;
+
     public ProjectRepository(EFTappContext dbContext)
     {
         this._dbContext = dbContext;
@@ -53,14 +48,11 @@ public class ProjectRepository : IProjectRepository
     public Task<Project> GetByBeschrijvingAsync(string beschrijving)
     {
         throw new NotImplementedException();
-
-
     }
 
     public async Task<Project> GetByIdAsync(int id)
     {
         return (await _dbContext.Projecten.FirstOrDefaultAsync(p => p.ProjectId == id))!;
-
     }
 
     public Task<Project> GetByNaamAsync(string naam)
@@ -81,8 +73,6 @@ public class ProjectRepository : IProjectRepository
             .Include(d => d.DatumUur)
             .Select(p => ConvertProjectNaarProjectDTO(p))
             .ToList();
-
-
 
         return projectDTOs;
     }
@@ -135,6 +125,5 @@ public class ProjectRepository : IProjectRepository
             Naam = project.Naam,
             Beschrijving = project.Beschrijving
         };
-
     }
 }

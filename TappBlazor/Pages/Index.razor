@@ -7,32 +7,80 @@
 
 *@
 
-<label for="exampleDataList" class="form-label">Datalist example</label>
-<input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-<datalist id="datalistOptions">
-    @if(Contactpersonen != null)
-    {
-        @foreach (var contactpersoon in Contactpersonen)
-        {
-            <option value="@contactpersoon.Familienaam @contactpersoon.Voornaam" />
-        }
-    }
-    else
-    {
-        <option>No contactpersonen found</option>
-    }
-
-</datalist>
-
 <div class="container-fluid vh-100 d-flex flex-column">
     <div class="row flex-grow-1 d-flex">
-        <div class="col-lg-6 col-12 overflow-auto" style="overflow-x: visible;">
+        <div class="col-lg-4 col-12 overflow-auto" style="overflow-x: visible;">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Filters
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <!-- Filters content starts here -->
+                            <div>
+                                <div class="datalist mb-3">
+                                    @* <label for="ContactPersonenDatalist" class="form-label">Zoeken op contactpersonen</label> *@
+                                    <div class="input-group">
+                                        <input class="form-control"
+                                               list="datalistOptions"
+                                               id="ContactPersonenDatalist"
+                                               placeholder="zoeken op contactpersonen"
+                                               @bind="selectedContactpersoonName"
+                                               @bind:event="oninput"
+                                               @onchange="OnContactpersoonChange">
+                                        <button type="button" class="btn btn-outline-secondary" @onclick="ClearInput">
+                                            X
+                                        </button>
+                                    </div>
+                                    <datalist id="datalistOptions">
+                                        @if (Contactpersonen != null)
+                                        {
+                                            @foreach (var contactpersoon in Contactpersonen)
+                                            {
+                                                <option id="@contactpersoon.ContactpersoonId" value="@contactpersoon.Familienaam @contactpersoon.Voornaam" />
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="Er heeft zich een fout voorgedaan, geen verbinding met de databank mogelijk. Check je internetverbinding" />
+                                        }
+                                    </datalist>
+                                </div>
+                                <div>
+                                    @*  <label class="form-label">Status</label> *@
+                                    <div class="input-group">
+                                        <input type="checkbox" class="btn-check" id="btn-actief"
+                                               @bind="isActief"
+                                               @bind:event="oninput">
+                                        <label class="btn btn-outline-success rounded-pill me-2" for="btn-actief">Actief</label><br />
+
+                                        <input type="checkbox" class="btn-check" id="btn-nietactief"
+                                               @bind="isNietActief"
+                                               @bind:event="oninput">
+                                        <label class="btn btn-outline-dark rounded-pill me-2" for="btn-nietactief">Niet actief</label><br />
+
+                                        <input type="checkbox" class="btn-check" id="btn-revisie"
+                                               @bind="isInRevisie"
+                                               @bind:event="oninput">
+                                        <label class="btn btn-outline-warning rounded-pill me-2" for="btn-revisie">In revisie</label><br />
+                                    </div>
+                                </div>
+
+                                <!-- Filters content ends here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @* Eerst kolom *@
-            <ProjectenOverzicht OnProjectSelectedOverzicht="OnProjectSelected" />
+            <ProjectenOverzicht OnProjectSelectedOverzicht="OnProjectSelected" selecteerOpContactpersoonID="selectedContactpersoonId" GeselecteerdeStatussen="projectStatusDictionary.Where(ps => ps.Value == true).Select(p => p.Key).ToList()" />
             @* Eind eerste kolom *@
         </div>
         @* Tweede kolom *@
-        <div class="col-lg-6 col-12 overflow-auto" style="overflow-x: visible;">
+        <div class="col-lg-8 col-12 overflow-auto" style="overflow-x: visible;">
             <TakenOverzicht ProjectId="selectedProjectId" />
         </div>
         @* Eind tweede kolom *@
@@ -40,60 +88,112 @@
 </div>
 
 
-@*
-<section class="position-relative py-4 py-xl-5">
-    <div class="container position-relative">
-        <div class="row">
-            <div class="col-xl-6">
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col">
-                            <div class="gradient-overlay top-overlay"></div> <!-- Top gradient overlay -->
-                            <div class="overflow-auto" style="max-height: 500px;">
-                                <!-- Set a max-height and overflow-auto -->
-                                <ProjectenOverzicht OnProjectSelected="OnProjectSelected" />
-                            </div> <!-- end overflow-auto -->
-                            <div class="gradient-overlay bottom-overlay"></div> <!-- Bottom gradient overlay -->
-
-                        </div><!-- end col -->
-                    </div><!-- end row -->
-                </div><!-- end container -->
-            </div><!-- end col -->
-
-            <div class="col-xl-6">
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col">
-                            <div class="gradient-overlay top-overlay"></div> <!-- Top gradient overlay -->
-                            <div class="overflow-auto" style="max-height: 500px;">
-                                <!-- zet maximum hoogte (voorlopig) en overflow-auto -->
-                                <!-- hier komen de taken-->
-                                <TakenOverzicht ProjectId="selectedProjectId" />
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @* End row
-    </div>
-    @* End container position
-</section>
-*@
-
 @code {
+    // de checkboxen
+    private bool _isActief = true;
+    private bool _isNietActief = true;
+    private bool _isInRevisie = true;
+
     private int selectedProjectId { get; set; }
+    private int selectedContactpersoonId { get; set; }
+    private string selectedContactpersoonName { get; set; }
+    private Dictionary<string, int> contactpersoonDictionary;
+    private Dictionary<int, bool> projectStatusDictionary;
+
     [Inject]
     private ContactpersoonService contactpersoonService { get; set; }
     public ICollection<ContactPersoonDTO> Contactpersonen { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
+        projectStatusDictionary = new Dictionary<int, bool>
+        {
+            { 1, _isActief },
+            { 2, _isNietActief },
+            { 3, _isInRevisie }
+        };
+
         Contactpersonen = await contactpersoonService.GetAllContactpersonenDTOAsync();
+        contactpersoonDictionary = Contactpersonen.ToDictionary(
+            cp => $"{cp.Familienaam} {cp.Voornaam}",
+            cp => cp.ContactpersoonId
+        );
+    }
+
+
+
+    private void FilterProjectsOpStatus()
+    {
+        // hier komt de logica om projecten te filteren op basis van checkbox status
+        Console.WriteLine($"Filteren met: Actief: {isActief}, Niet Actief: {isNietActief}, In Revisie: {isInRevisie}");
+        // Voeg hier de daadwerkelijke filtering logica toe
+    }
+
+    private void OnContactpersoonChange(ChangeEventArgs e)
+    {
+        if (contactpersoonDictionary.TryGetValue(selectedContactpersoonName, out int contactpersoonId))
+        {
+            selectedContactpersoonId = contactpersoonId;
+            FilterOpContactpersoon(contactpersoonId);
+        }
+        else
+        {
+            selectedContactpersoonId = 0;
+        }
+
+    }
+
+    private void FilterOpContactpersoon(int contactpersoonId)
+    {
+        // hier komt de logica om projecten te filteren op contactpersoon
+        //mag waarschijnlijk weg, oude stukje code
+
     }
 
     private void OnProjectSelected(int projectId)
     {
         selectedProjectId = projectId;
     }
+
+    private void ClearInput()
+    {
+        selectedContactpersoonName = string.Empty;
+        selectedContactpersoonId = 0;
+        //FilterOpContactpersoon(selectedContactpersoonId);
+    }
+
+    //aangepaste getters en setters voor de checkboxbools
+    private bool isActief
+    {
+        get => _isActief;
+        set
+        {
+            _isActief = value;
+            projectStatusDictionary[1] = value;
+            FilterProjectsOpStatus();
+        }
+    }
+
+    private bool isNietActief
+    {
+        get => _isNietActief;
+        set
+        {
+            _isNietActief = value;
+            projectStatusDictionary[2] = value;
+            FilterProjectsOpStatus();
+        }
+    }
+
+    private bool isInRevisie
+    {
+        get => _isInRevisie;
+        set
+        {
+            _isInRevisie = value;
+            projectStatusDictionary[3] = value;
+            FilterProjectsOpStatus();
+        }
+    }
+
 }

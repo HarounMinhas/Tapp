@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Model.Entities;
 using System.Reflection;
 using Tapp.Configuration;
-using Model.Entities;
+
 namespace DAL;
 
 public class EFTappContext : DbContext
@@ -20,8 +21,9 @@ public class EFTappContext : DbContext
     public DbSet<Taak> Taken { get; set; }
     public DbSet<ToDo> ToDos { get; set; }
 
-    public EFTappContext(DbContextOptions<EFTappContext> options) : base(options) { }
-
+    public EFTappContext(DbContextOptions<EFTappContext> options) : base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -30,7 +32,6 @@ public class EFTappContext : DbContext
         var namespaceName = Assembly.GetExecutingAssembly().GetName().Name;
         //hier kan ook statisch geopteerd worden voor "DAL", maar maakt het wat onafhankelijker van elkaar
         Configuration = ConfigurationHelper.BuildConfigurationAppSettings(namespaceName);
-
 
         var connectionString = Configuration.GetConnectionString("EFTapp");
 

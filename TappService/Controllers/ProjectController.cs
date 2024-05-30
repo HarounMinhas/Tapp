@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DAL.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using System;
-using DAL.Interfaces.Repositories;
 using Model.DTOs;
-using System.Threading.Tasks;
 
 namespace TappService.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class ProjectController : ControllerBase
@@ -43,5 +40,4 @@ public class ProjectController : ControllerBase
     {
         return base.Ok(await _projectRepository.GetProjectDTOByContactpersoon(naam));
     }
-
 }

@@ -1,4 +1,1 @@
-﻿using DAL;
-using DAL.Repositories;
-
-Console.WriteLine("yay");
+﻿Console.WriteLine("yay");

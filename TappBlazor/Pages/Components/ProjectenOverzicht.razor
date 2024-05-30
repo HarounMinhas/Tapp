@@ -1,12 +1,9 @@
-﻿
-@*
+﻿@*
 	Deze onderdeel splitsen. Deze component geeft een overzicht van alle projecten weer.
 	De gebruiker kan op een project klikken en de taken van dat project bekijken.
 *@
 
-<PageTitle>Projecten</PageTitle>
-
-    @* <div style="background: #ffffff;">
+@* <div style="background: #ffffff;">
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Offcanvas - enable scrolling</button>
         <div id="offcanvasWithBothOptions" class="offcanvas offcanvas-top visible show" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="true" aria-controls="offcanvasScrolling" aria-labelledby="offcanvasWithBothOptionsLabel" style="width: auto;height: 300px;color: rgba(33,37,41,0.25);background: linear-gradient(#ffffff, rgba(255,255,255,0)), rgba(255,255,255,0.56);">
             <div class="offcanvas-header">
@@ -118,12 +115,12 @@
     </div>
  *@
 
-@if (projectDTOs != null)
+@if (ProjectDTOsWeergave != null)
 {
-    foreach (ProjectDTO project in projectDTOs)
+    foreach (ProjectDTO project in ProjectDTOsWeergave)
     {
         <Projecten p="project" OnProjectSelected="SetSelectedProjectId" CardWeergaveHorizontaal="false" />
-       
+
     }
 }
 else
@@ -140,11 +137,18 @@ else
     [Inject]
     private ProjectenService projectenService { get; set; }
 
-    public ICollection<ProjectDTO> projectDTOs { get; set; }
+    public ICollection<ProjectDTO> AllProjectDTOs { get; set; }
+    public ICollection<ProjectDTO> ProjectDTOsWeergave { get; set; }
 
     [Parameter]
     public int selectedProjectId { get; set; }
 
+    [Parameter]
+    public int selecteerOpContactpersoonID { get; set; }
+    [Parameter]
+    public List<int> GeselecteerdeStatussen { get; set; }
+    private int oudAantaGeselecteerdeStatussen { get; set; } = 3;
+    public int oudContactpersoonID { get; set; }
     [Parameter]
     public EventCallback<int> OnProjectSelectedOverzicht { get; set; }
 
@@ -152,14 +156,43 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        projectDTOs = await projectenService.GetProjectDTOByContactpersoon("ja");//.GetAllProjectenDTOAsync();
+        AllProjectDTOs = await projectenService.GetAllProjectenDTOAsync();
+        ProjectDTOsWeergave = AllProjectDTOs;
+        oudAantaGeselecteerdeStatussen = GeselecteerdeStatussen.Count();
     }
 
+    protected override void OnParametersSet()
+    {
+        // if (oudContactpersoonID != selecteerOpContactpersoonID && oudAantaGeselecteerdeStatussen != GeselecteerdeStatussen.Count())
+        // {
+            base.OnParametersSet();
+            ParameterWijziging();
+            oudContactpersoonID = selecteerOpContactpersoonID;
+        // }
+    }
+
+    private void ParameterWijziging()
+    {
+        if (selecteerOpContactpersoonID == 0)
+        {
+            ProjectDTOsWeergave = AllProjectDTOs;
+        }
+        else
+        {
+            ProjectDTOsWeergave = AllProjectDTOs.Where(p => p.Organisatie.Contactpersonen.ContactpersoonId == selecteerOpContactpersoonID).ToList();
+        }
+        if (GeselecteerdeStatussen != null && ProjectDTOsWeergave != null)
+        {
+            ProjectDTOsWeergave = ProjectDTOsWeergave.Where(p => GeselecteerdeStatussen.Contains(p.Status?.StatusId ?? 0)).ToList();
+            oudAantaGeselecteerdeStatussen = GeselecteerdeStatussen.Count();
+        }
+    }
 
     private void SetSelectedProjectId(int projectId)
     {
+
         selectedProjectId = projectId;
         OnProjectSelectedOverzicht.InvokeAsync(selectedProjectId);
     }
-   
+
 }

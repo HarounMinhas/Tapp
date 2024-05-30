@@ -1,8 +1,3 @@
-using DAL.Interfaces.Repositories;
-using DAL.Repositories;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Model.Entities;
 using TappBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
