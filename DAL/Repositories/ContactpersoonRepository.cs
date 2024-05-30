@@ -1,4 +1,5 @@
 ﻿using DAL.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Model.DTOs;
 using Model.Entities;
 using System;
@@ -27,7 +28,10 @@ public class ContactpersoonRepository : IContactpersoonRepository
 
     public async Task<ICollection<ContactPersoonDTO>> GetAllAsync()
     {
-        return (_dbContext.Contactpersonen.Select(c => ConvertContactPersoonNaarContactpersoonDTO(c)).OrderBy(c => c.Familienaam)).ToList() ;
+        return await _dbContext.Contactpersonen
+             .OrderBy(c => c.Familienaam)
+             .Select(c => ConvertContactPersoonNaarContactpersoonDTO(c))
+             .ToListAsync();
     }
 
     public Task<ContactPersoonDTO> GetByIdAsync(int id)
@@ -49,9 +53,9 @@ public class ContactpersoonRepository : IContactpersoonRepository
                 Voornaam = contactPersoon.Voornaam,
                 Familienaam = contactPersoon.Familienaam,
                 Email = contactPersoon.Email,
-                TelefoonNummer= contactPersoon.TelefoonNummer!,
+                TelefoonNummer = contactPersoon.TelefoonNummer!,
                 GSMNummer = contactPersoon.GSMNummer!
             };
-        
+
     }
 }

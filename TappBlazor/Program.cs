@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-
+builder.Services.AddTransient<ContactpersoonService>();
 builder.Services.AddTransient<ProjectenService>();
 builder.Services.AddTransient<TakenService>();
 builder.Services.AddSingleton(

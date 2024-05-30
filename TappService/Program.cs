@@ -14,9 +14,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Logging.AddConsole();
 
-builder.Services.AddScoped<IContactpersoonRepository, ContactpersoonRepository>();
-builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ITaakRepository, TaakRepository>();
+builder.Services.AddScoped<IContactpersoonRepository, ContactpersoonRepository>();
 
 builder.Services.AddDbContext<EFTappContext>();
 
@@ -52,7 +52,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseRouting();
 
-app.UseEndpoints(endpoints => {  
+app.UseEndpoints(endpoints =>
+{
     endpoints.MapControllers();  //Map alles controller routes
 });
 
