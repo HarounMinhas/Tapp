@@ -166,3 +166,9 @@ body {
 .me-2 {
     margin-right: 0.5rem;
 }
+
+/*
+Kleine aanpassing zodat offcanvas teruggegeven wordt, voor een of andere reden werkte dit niet meer*/
+.offcanvas.show{
+    visibility:visible;
+}

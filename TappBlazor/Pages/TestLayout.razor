@@ -4,26 +4,19 @@
     Button with data-bs-target
 </button>
 
-<div class="offcanvas offcanvas-start"  id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+<div class="offcanvas offcanvas-start" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <div class="offcanvas-title" id="offcanvasExampleLabel">
+            <h4>Hi Samantha</h4>
+            <p>Welcome back to the workspace, we missed You!</p>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div>
-            Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-        </div>
 
-    </div>
-</div>
-@* Dashboard Layout *@
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-3 col-lg-3 bg-dark text-white sidebar">
             <div class="p-4">
-                <h4>Hi Samantha</h4>
-                <p>Welcome back to the workspace, we missed You!</p>
+
                 <input type="text" class="form-control mb-3" placeholder="Search for projects">
                 <h5>Projects</h5>
                 <div class="project-cards mt-3">
@@ -58,8 +51,16 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
+    </div>
+</div>
+@* Dashboard Layout *@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
         <!-- Main Content -->
         <div class="col-md-9 col-lg-9 main-content">
             <div class="p-4">
